@@ -15,16 +15,18 @@ public class urinals {
                 cnt++;
             }
             return "rule" + Integer.toString(cnt)+".txt";
-
-            //            return true;
         } else{
             return fname;
-            //            return false;
         }
     }
 
-    public String writeFile(int urinals, String fname){
+    public String writeFile(int urinals, String fname) throws IOException {
         if(!(new File(fname).exists())){
+            System.out.println("file does not exist!");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fname, true));
+            writer.write(Integer.toString(urinals));
+            writer.newLine();
+            writer.close();
             return "Bad File name!";
         }
         else{
@@ -80,19 +82,24 @@ public class urinals {
             return "File not found!";
         }else{
             try{
+                System.out.println("output: ");
                 BufferedReader br
                         = new BufferedReader(new FileReader(file));
                 Scanner sc = new Scanner(file);
                 String urinals;
                 String outFilename = outFile();
-//                while (sc.hasNextLine()){
-//                    urinals = sc.nextLine();
-//                    int u = countUrinals(urinals);
-//                    writeFile(u, outFilename);
-//
-//                }
+                System.out.println("outfile name: "+outFilename);
+                while (sc.hasNextLine()){
+                    urinals = sc.nextLine();
+                    int u = countUrinals(urinals);
+                    System.out.println(u);
+                    writeFile(u, outFilename);
+
+                }
             }catch (FileNotFoundException e){
                 System.out.println(e.getMessage());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
             return "File read complete";
         }
@@ -100,14 +107,10 @@ public class urinals {
 
     public static void main(String[] args) throws IOException {
         urinals urinals = new urinals();
-//        System.out.println(urinals.outFile());;
-//        outFile();
-//        System.out.println(urinals.writeFile(1, "rule3.txt"));;
         System.out.println("Enter the input file name: ");
         Scanner sc = new Scanner(System.in);
         String fname = sc.nextLine();
         urinals.readFile(fname);
-
     }
 
 }
