@@ -38,6 +38,22 @@ class urinalsTest {
     void readFileSuccess(){
         Assertions.assertEquals("File read complete", urinals.readFile("urinals.dat"));
     }
+
+    @Test
+    void countUrinals(){
+        Assertions.assertEquals(3, urinals.countUrinals("00000"));
+    }
+
+    @Test
+    void countUrinalsInvalid(){
+        Assertions.assertEquals(-1, urinals.countUrinals("011"));
+    }
+
+    @Test
+    void countUrinalsInvalidText(){
+        Assertions.assertEquals(-1, urinals.countUrinals("011a"));
+    }
+
     @Test
     void duplicateOutFile(){
         Assertions.assertEquals("rule1.txt", urinals.outFile());
