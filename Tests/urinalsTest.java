@@ -28,6 +28,16 @@ class urinalsTest {
     void invalidStringType3(){
         Assertions.assertEquals(false, urinals.isGoodString("110"));
     }
+
+    @Test
+    void readFileFailed(){
+        Assertions.assertEquals("File not found!", urinals.readFile("unnamed.dat"));
+    }
+
+    @Test
+    void readFileSuccess(){
+        Assertions.assertEquals("File read complete", urinals.readFile("urinals.dat"));
+    }
     @Test
     void duplicateOutFile(){
         Assertions.assertEquals("rule1.txt", urinals.outFile());

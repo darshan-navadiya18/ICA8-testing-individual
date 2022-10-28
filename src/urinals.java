@@ -1,7 +1,5 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.util.Scanner;
 
 /**
  * @author Darshan Navadiya
@@ -76,21 +74,39 @@ public class urinals {
         }
         return cnt;
     }
+    public String readFile(String filename){
+        File file = new File(filename);
+        if(!file.exists()){
+            return "File not found!";
+        }else{
+            try{
+                BufferedReader br
+                        = new BufferedReader(new FileReader(file));
+                Scanner sc = new Scanner(file);
+                String urinals;
+                String outFilename = outFile();
+//                while (sc.hasNextLine()){
+//                    urinals = sc.nextLine();
+//                    int u = countUrinals(urinals);
+//                    writeFile(u, outFilename);
+//
+//                }
+            }catch (FileNotFoundException e){
+                System.out.println(e.getMessage());
+            }
+            return "File read complete";
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         urinals urinals = new urinals();
 //        System.out.println(urinals.outFile());;
 //        outFile();
 //        System.out.println(urinals.writeFile(1, "rule3.txt"));;
-        System.out.println(urinals.countUrinals("10001"));
-        System.out.println(urinals.countUrinals("1001"));
-        System.out.println(urinals.countUrinals("00000"));
-        System.out.println(urinals.countUrinals("0000"));
-        System.out.println(urinals.countUrinals("01000"));
-        System.out.println(urinals.countUrinals("011"));
-        System.out.println(urinals.countUrinals("011a"));
-
-
+        System.out.println("Enter the input file name: ");
+        Scanner sc = new Scanner(System.in);
+        String fname = sc.nextLine();
+        urinals.readFile(fname);
 
     }
 
