@@ -10,13 +10,27 @@ class urinalsTest {
     urinals urinals = new urinals();
 
     @Test
-    void outFile() {
-//        Assertions.assertEquals("rule.txt", urinals.outFile());
+    void validString(){
+        Assertions.assertEquals(true, urinals.isGoodString("1001"));
     }
 
     @Test
+    void invalidStringType1(){
+        Assertions.assertEquals(false, urinals.isGoodString("10a01"));
+    }
+
+    @Test
+    void invalidStringType2(){
+        Assertions.assertEquals(false, urinals.isGoodString("darshan"));
+    }
+
+    @Test
+    void invalidStringType3(){
+        Assertions.assertEquals(false, urinals.isGoodString("110"));
+    }
+    @Test
     void duplicateOutFile(){
-//        Assertions.assertEquals("rule1.txt", urinals.outFile());
+        Assertions.assertEquals("rule1.txt", urinals.outFile());
     }
 
     @Test
